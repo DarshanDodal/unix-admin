@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-unixadmindashboard-dev-181259-authRole",
+      "UnauthRoleArn": "arn:aws:iam::493630275025:role/amplify-unixadmindashboard-dev-181259-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::493630275025:role/amplify-unixadmindashboard-dev-181259-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-unixadmindashboard-dev-181259-deployment",
+      "UnauthRoleName": "amplify-unixadmindashboard-dev-181259-unauthRole",
+      "StackName": "amplify-unixadmindashboard-dev-181259",
+      "StackId": "arn:aws:cloudformation:ap-south-1:493630275025:stack/amplify-unixadmindashboard-dev-181259/c5adeba0-af31-11eb-b3fc-02e7a26de550",
+      "AmplifyAppId": "d3n6wqg1p4elfx"
+    },
+    "categories": {
+      "auth": {
+        "unixadmindashboard03b72675": {}
+      }
+    }
+  }
+}
