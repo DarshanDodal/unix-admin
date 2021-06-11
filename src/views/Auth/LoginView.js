@@ -100,6 +100,8 @@ const LoginView = () => {
 	// useEffect(() => {
 	//   console.log(UserPool.getCurrentUser());
 	// });
+
+	const forgetPassword = () => {};
 	return (
 		<Paper className={classes.paperContainer} title="Login">
 			<Box
@@ -115,18 +117,38 @@ const LoginView = () => {
 							email: "",
 							password: "",
 						}}
-						validationSchema={Yup.object().shape({
-							email: Yup.string()
-								.email("Must be a valid email")
-								.max(255)
-								.required("Email is required"),
-							password: Yup.string().max(255).required("Password is required"),
-						})}
+						// validationSchema={Yup.object().shape({
+						// 	email: Yup.string()
+						// 		.email("Must be a valid email")
+						// 		.max(255)
+						// 		.required("Email is required"),
+						// 	password: Yup.string().max(255).required("Password is required"),
+						// })}
 						onSubmit={(values, action) => {
 							Auth.signIn(values.email, values.password)
 								.then((user) => {
 									console.log(user);
 									dispatch({ type: "AUTH_REFRESH" });
+									if (user.challengeName === "NEW_PASSWORD_REQUIRED") {
+										const { requiredAttributes } = user.challengeParam; // the array of required attributes, e.g ['email', 'phone_number']
+										Auth.completeNewPassword(
+											user, // the Cognito User Object
+											values.password, // the new password
+											{
+												profile: "admin",
+												name: "Purva",
+											}
+										)
+											.then((user) => {
+												// at this time the user is logged in if no MFA required
+												console.log(user);
+											})
+											.catch((e) => {
+												console.log(e);
+											});
+									} else {
+										// other situations
+									}
 									history.push("/admin/dashboard");
 								})
 								.catch((err) => {
@@ -206,7 +228,8 @@ const LoginView = () => {
 										Sign in now
 									</Button>
 								</Box>
-								{/* <Typography color="textSecondary" variant="body1">
+								<Button onClick={forgetPassword}>Forget</Button>
+								<Typography color="textSecondary" variant="body1">
 									Don&apos;t have an account?{" "}
 									<Link
 										className={classes.navLinks}
@@ -216,7 +239,7 @@ const LoginView = () => {
 									>
 										Sign up
 									</Link>
-								</Typography> */}
+								</Typography>
 							</form>
 						)}
 					</Formik>

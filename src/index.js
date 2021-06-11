@@ -40,7 +40,7 @@ const hist = createBrowserHistory();
 const store = createStore(reducer);
 ReactDOM.render(
 	<Provider store={store}>
-		<Router history={hist}>
+		<Router basename="/" history={hist}>
 			<MuiPickersUtilsProvider utils={DateFnsUtils}>
 				<ThemeProvider theme={theme}>
 					<App />
