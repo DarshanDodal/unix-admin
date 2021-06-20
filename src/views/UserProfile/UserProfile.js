@@ -67,6 +67,7 @@ import {
 	UpdateInquiry,
 	NewStudent,
 	GetStudents,
+	DeleteStudent,
 } from "../../Server/server";
 import {
 	MuiPickersUtilsProvider,
@@ -394,6 +395,22 @@ export default function UserProfile() {
 	const { search } = useSelector((state) => {
 		return state;
 	});
+
+	const handleDelete = (id) => {
+		setDisabled(true);
+		DeleteStudent({ student_id: id })
+			.then(() => {
+				openSuccessToast("Success.");
+				// handleClose();
+				setRefresh(!refresh);
+				setDisabled(false);
+				handleDialogClose();
+			})
+			.catch((err) => {
+				openErrorToast(err.message);
+				setDisabled(false);
+			});
+	};
 
 	const newStudent = () => {
 		setDisabled(true);
@@ -1477,6 +1494,9 @@ export default function UserProfile() {
 					handleSuccess={() => {
 						openSuccessToast("Success.");
 						handleRefresh();
+					}}
+					handleDelete={(id) => {
+						handleDelete(id);
 					}}
 				/>
 			)}

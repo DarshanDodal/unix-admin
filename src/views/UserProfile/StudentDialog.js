@@ -1001,7 +1001,20 @@ export default function UserProfile(props) {
 						</CardBody>
 					</Card>
 				</DialogContent>
-				<DialogActions>
+				<DialogActions style={{ display: "flex", position: "relative" }}>
+					<Button
+						onClick={() => {
+							props.handleDelete(props.student.student_id);
+						}}
+						style={{
+							display: "flex",
+							position: "absolute",
+							left: 10,
+						}}
+						color="primary"
+					>
+						Delete
+					</Button>
 					<Button onClick={props.handleClose} color="primary">
 						Close
 					</Button>

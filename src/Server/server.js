@@ -271,6 +271,24 @@ export const UpdateStudent = async (body) => {
 	return response;
 };
 
+export const DeleteStudent = async (body) => {
+	const response = await new Promise((resolve, reject) => {
+		fetch(serverLink + "/delete/student", {
+			method: "POST",
+			body: JSON.stringify(body),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then((response) => response.json())
+			.then((res) => {
+				resolve(res);
+			})
+			.catch((err) => reject(err));
+	});
+	return response;
+};
+
 export const UpdateStudentFile = async (body) => {
 	const response = await new Promise((resolve, reject) => {
 		fetch(serverLink + "/update/student/file", {

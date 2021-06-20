@@ -211,8 +211,7 @@ export default function Feedback() {
 		return selected.indexOf(feedback.course_name) !== -1;
 	});
 
-	const chooseFilteredOrAll =
-		selected.length === 0 ? Feedback : courseWiseFilter;
+	const chooseFilteredOrAll = Feedback;
 
 	// Sort feedbacks by date
 	const feedbacksDateWiseSorted = chooseFilteredOrAll.filter((feedback) => {
@@ -249,7 +248,6 @@ export default function Feedback() {
 	const tabledFeedbacks = FeedbacksPaginated.map((fb) => {
 		return [
 			fb.student_name,
-			fb.course_name,
 			<Box
 				component="fieldset"
 				style={{
@@ -368,10 +366,10 @@ export default function Feedback() {
 						<CardBody>
 							<Grid container justify="flex-end">
 								<FormControl className={classes.formMulti}>
-									<InputLabel color="secondary" id="demo-mutiple-chip-label">
+									{/* <InputLabel color="secondary" id="demo-mutiple-chip-label">
 										{switchStatePending ? "All Courses" : "Course wise filter"}
-									</InputLabel>
-									<Select
+									</InputLabel> */}
+									{/* <Select
 										labelId="demo-mutiple-chip-label"
 										id="demo-mutiple-chip"
 										multiple
@@ -411,10 +409,8 @@ export default function Feedback() {
 												{course.course_name}
 											</MenuItem>
 										))}
-										{/* <MenuItem key={"clear"} onClick={hab} value={"clear"}>
-								<ClearIcon /> clear selection
-							</MenuItem> */}
-									</Select>
+										
+									</Select> */}
 								</FormControl>
 								<KeyboardDatePicker
 									disabled={switchStatePending}
@@ -461,13 +457,7 @@ export default function Feedback() {
 							</Grid>
 							<Table
 								tableHeaderColor="info"
-								tableHead={[
-									"Student Name",
-									"Course",
-									"Rating",
-									"Reviews",
-									"Date",
-								]}
+								tableHead={["Student Name", "Rating", "Reviews", "Date"]}
 								tableData={tabledFeedbacks}
 							/>
 						</CardBody>
